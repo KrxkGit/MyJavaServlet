@@ -1,7 +1,5 @@
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -24,18 +22,41 @@ public class MyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 //        super.doGet(req, resp);
         System.out.println("Request arrive!");
-        String type = req.getParameter("type");  //获取参数
+        HttpSession session = req.getSession();
+        String type;
+        if(session.isNew()) {
+            type = req.getParameter("type");  //获取参数
+            session.setAttribute("type", type);
+        }
+        else {
+            type = (String) session.getAttribute("type");
+        }
 
         resp.setHeader("content-type", "text/html;charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
         System.out.println(type);
+        int num;
         if (type.equals("int")) {
-            int num = Integer.parseInt(req.getParameter("value"));
+            num = 0;
+            Cookie[] cookies = req.getCookies();
+            if(cookies!=null) {
+                for (Cookie cookie : cookies) {
+                    if(cookie.getName().equals("Value")) {
+                        num = Integer.parseInt(cookie.getValue());
+                    }
+                }
+            }
+            else {
+                num = Integer.parseInt(req.getParameter("value"));
+                Cookie cookie = new Cookie("Value", String.format("%d", num));
+                resp.addCookie(cookie);
+            }
             out.println("<html><body><h3>");
             out.println(num);
             out.println("</h3></body></html>");
+
 
         }
         else {
