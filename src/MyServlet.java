@@ -1,3 +1,4 @@
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -63,5 +64,10 @@ public class MyServlet extends HttpServlet {
             out.println("<html><body><h3>类型： " + type +
                     "</body></html>");
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        doGet(req, resp);
     }
 }
