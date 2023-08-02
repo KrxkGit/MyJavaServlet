@@ -48,7 +48,7 @@ public class MyServlet extends HttpServlet {
                 }
             }
             else {
-                num = Integer.parseInt(req.getParameter("value"));
+                num = Integer.parseInt(req.getParameter("Value"));
                 Cookie cookie = new Cookie("Value", String.format("%d", num));
                 resp.addCookie(cookie);
             }
