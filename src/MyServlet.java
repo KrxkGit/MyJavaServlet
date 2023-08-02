@@ -1,9 +1,7 @@
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.annotation.Documented;
 
 @WebServlet("/Krxk")
 public class MyServlet extends HttpServlet {
