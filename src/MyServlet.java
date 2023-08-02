@@ -3,12 +3,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.annotation.Documented;
 
 @WebServlet("/Krxk")
 public class MyServlet extends HttpServlet {
 //    @Override
 //    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
-////        super.service(req, res);
 //        PrintWriter out = res.getWriter();
 //        out.println("<html>");
 //        out.println(("<head>"));
@@ -21,7 +21,7 @@ public class MyServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-//        super.doGet(req, resp);
+//        MyNio.Test();
         System.out.println("Request arrive!");
         HttpSession session = req.getSession();
         String type;
